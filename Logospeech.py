@@ -1,23 +1,27 @@
 ascii_low = 32
 ascii_high = 126
+key=331229472810198259120562569212310673437190998812
+
 def decrypt(landing_input):
     input2 = cbb(landing_input)
     return input2
 def cbb(landing_input):
-    input2 = fl(landing_input,1)
+    seeds = sds(key)
+    input2 = v(landing_input,g(200,seed=seeds[7]))
+    input2 = fl(input2,1)
     input2 = py(input2)
     input2 = p(input2)
     input2 = ec(input2)
     input2 = d(input2,0)
     input2.reverse()
-    input2 = v(input2,g(200,seed=310673))
+    input2 = v(input2,g(200,seed=seeds[6]))
     input2 = d(input2,1)
     input2.reverse()
-    input2 = v(input2,g(200,seed=569212))
-    input2 = v(input2,g(200,seed=120562))
-    input2 = v(input2,g(200,seed=198259))
-    input2 = v(input2,g(200,seed=472810))
-    input2 = v(input2,g(200,seed=331229))
+    input2 = v(input2,g(200,seed=seeds[5]))
+    input2 = v(input2,g(200,seed=seeds[4]))
+    input2 = v(input2,g(200,seed=seeds[3]))
+    input2 = v(input2,g(200,seed=seeds[2]))
+    input2 = v(input2,g(200,seed=seeds[1]))
     input2 = ps(input2)
     input2 = nc(input2,1)
     input2 = d(input2,0)
@@ -28,7 +32,15 @@ def cbb(landing_input):
     input2 = ec(input2)
     input2 = d(input2,1)
     input2 = fl(input2,0)
+    input2 = v(input2,g(200,seed=seeds[0]))
     return input2
+def sds(key, block_size=6):
+    key_str = str(key)
+    seeds = []
+    for i in range(0, len(key_str), block_size):
+        chunk = key_str[i:i+block_size]
+        seeds.append(int(chunk))
+    return seeds
 def d(t_input,index):
     for i in range(len(t_input)):
         if index == 0:
