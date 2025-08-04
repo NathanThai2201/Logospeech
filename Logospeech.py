@@ -1,6 +1,6 @@
 ascii_low = 32
 ascii_high = 126
-key=331229472810198259120562569212310673437190998812
+key=3312294728101982591205625692123106734371909988128173492317382644
 
 def decrypt(landing_input):
     input2 = cbb(landing_input)
@@ -34,7 +34,7 @@ def cbb(landing_input):
     input2 = fl(input2,0)
     input2 = v(input2,g(200,seed=seeds[0]))
     return input2
-def sds(key, block_size=6):
+def sds(key, block_size=8):
     key_str = str(key)
     seeds = []
     for i in range(0, len(key_str), block_size):
