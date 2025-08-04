@@ -4,7 +4,8 @@ def decrypt(landing_input):
     input2 = cbb(landing_input)
     return input2
 def cbb(landing_input):
-    input2 = py(landing_input)
+    input2 = fl(landing_input,1)
+    input2 = py(input2)
     input2 = p(input2)
     input2 = ec(input2)
     input2 = d(input2,0)
@@ -26,7 +27,7 @@ def cbb(landing_input):
     input2 = r(input2)
     input2 = ec(input2)
     input2 = d(input2,1)
-
+    input2 = fl(input2,0)
     return input2
 def d(t_input,index):
     for i in range(len(t_input)):
@@ -174,7 +175,22 @@ def py(t_input):
 
     t_input = [char for row in fake_pyramid for char in row]
     return t_input
+def fl(t_input, index):
+    flicker_key = 5
+    for i in range(len(t_input)):
+        temp = ord(t_input[i])
+        if ascii_low <= temp <= ascii_high:
+            if index == 0:
+                temp = temp + flicker_key if i % 2 == 0 else temp - flicker_key
+            else:
+                temp = temp - flicker_key if i % 2 == 0 else temp + flicker_key
+            if temp < ascii_low:
+                temp += (ascii_high - ascii_low + 1)
+            if temp > ascii_high:
+                temp -= (ascii_high - ascii_low + 1)
 
+            t_input[i] = chr(temp)
+    return t_input
 
 def main():
     with open("in.txt", 'r') as file:
