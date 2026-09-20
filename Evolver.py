@@ -27,6 +27,7 @@ def main():
         "0195739"
     ]
 
+
     evolutions = []
 
     for i in range(len(seeds)):
